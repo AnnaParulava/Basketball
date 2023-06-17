@@ -15,7 +15,7 @@
         android:theme="@style/Theme.Basketball"
         tools:targetApi="31">
         <activity
-            android:name=".BasketballActivity"
+            android:name=".ui.BasketballActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
