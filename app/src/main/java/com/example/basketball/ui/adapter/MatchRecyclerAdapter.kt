@@ -19,7 +19,7 @@ class MatchRecyclerAdapter : ListAdapter<Match, MatchRecyclerAdapter.MatchViewHo
 ) {
 
     var matchList: List<Match> = listOf()
-    fun ImageView.loadUrl(url: String) {
+    private fun ImageView.loadUrl(url: String) {
         Glide
             .with(context.applicationContext)
             .load(url)

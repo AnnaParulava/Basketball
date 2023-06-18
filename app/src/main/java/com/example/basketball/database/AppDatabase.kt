@@ -7,9 +7,9 @@ import androidx.room.RoomDatabase
 import com.example.basketball.pojo.Country
 import com.example.basketball.pojo.League
 import com.example.basketball.pojo.Match
+import com.example.basketball.pojo.Team
 
-//@Database(entities = [Match::class, Country::class, League::class], version = 1, exportSchema = false)
-@Database(entities = [Match::class, Country::class], version = 1, exportSchema = false)
+@Database(entities = [Match::class, Country::class, Team::class], version = 2)
 abstract class AppDatabase: RoomDatabase() {
 
     companion object{
@@ -34,4 +34,5 @@ abstract class AppDatabase: RoomDatabase() {
 
     abstract fun countriesDao(): CountriesDao
     abstract fun matchesDao(): MatchDao
+    abstract fun teamDao(): TeamDao
 }

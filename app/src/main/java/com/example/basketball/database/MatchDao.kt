@@ -11,6 +11,6 @@ interface MatchDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMatches(matches:  List<Match>)
 
-    @Query("SELECT * FROM match")
+    @Query("SELECT * FROM `match`")
     suspend fun getMatchList(): List<Match>
 }
