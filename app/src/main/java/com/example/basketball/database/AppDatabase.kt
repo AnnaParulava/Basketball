@@ -9,7 +9,7 @@ import com.example.basketball.pojo.League
 import com.example.basketball.pojo.Match
 
 //@Database(entities = [Match::class, Country::class, League::class], version = 1, exportSchema = false)
-@Database(entities = [Country::class], version = 1, exportSchema = false)
+@Database(entities = [Match::class, Country::class], version = 1, exportSchema = false)
 abstract class AppDatabase: RoomDatabase() {
 
     companion object{
@@ -33,4 +33,5 @@ abstract class AppDatabase: RoomDatabase() {
     }
 
     abstract fun countriesDao(): CountriesDao
+    abstract fun matchesDao(): MatchDao
 }
