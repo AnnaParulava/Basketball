@@ -1,6 +1,11 @@
 package com.example.basketball.pojo
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "match")
 data class Match(
+    @PrimaryKey
     val event_key: String,
     val event_date: String,
     val event_time: String,

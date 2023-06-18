@@ -1,6 +1,7 @@
 package com.example.basketball.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +20,6 @@ import kotlinx.coroutines.withContext
 
 class SplashFragment : Fragment() {
 
-    //private var viewModel: SplashViewModel? = null
 
     private val viewModel by lazy {
         ViewModelProvider(this)[SplashViewModel::class.java]
@@ -28,7 +28,6 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-       // viewModel = ViewModelProvider(this)[SplashViewModel::class.java]
         CoroutineScope(Dispatchers.IO).launch {
             loadData()
         }
