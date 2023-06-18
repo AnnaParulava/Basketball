@@ -20,17 +20,13 @@ class SplashViewModel(application: Application) : AndroidViewModel(application) 
             val apiService = ApiFactory.apiService
 
             val matches = apiService.getMatches().result
-//            val players = apiService.getPlayers()
-//            val leagues = apiService.getLeagues()
-//
+            val team = apiService.getTeam().result
+
             val matchDao = db.matchesDao()
-//            val playerDao = AppDatabase.getInstance().playerDao()
-//            val leagueDao = AppDatabase.getInstance().leagueDao()
-//
-             matchDao.insertMatches(matches)
-//            playerDao.insertPlayers(players)
-//            leagueDao.insertLeagues(leagues)
-            Log.d("AAA", "Success: ${matchDao.getMatchList()}")
+            val teamDao = db.teamDao()
+
+            matchDao.insertMatches(matches)
+            teamDao.insertTeam(team)
         }
     }
 }
