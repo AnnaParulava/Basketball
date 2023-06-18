@@ -24,7 +24,8 @@ interface ApiService {
         private const val API_KEY = "14dd14e524d4520208e028b139b44c80718e431fe6dd0c02d4b59ba5bea610f3"
     }
 
-    @GET("?met=$QUERY_LIVESCORE")
+  //  @GET("?met=$QUERY_LIVESCORE")
+    @GET("?met=Livescore&APIkey=14dd14e524d4520208e028b139b44c80718e431fe6dd0c02d4b59ba5bea610f3")
     suspend fun getMatches(
         @Query(QUERY_API_KEY)  APIkey: String = API_KEY
     ): MatchApiResponse

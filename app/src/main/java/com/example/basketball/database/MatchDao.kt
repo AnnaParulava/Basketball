@@ -13,4 +13,7 @@ interface MatchDao {
 
     @Query("SELECT * FROM `match`")
     suspend fun getMatchList(): List<Match>
+
+    @Query("SELECT away_team_key FROM `match` WHERE event_away_team == :away_team LIMIT 1")
+    suspend fun getMatchKey(away_team: String?): Match? = null
 }
