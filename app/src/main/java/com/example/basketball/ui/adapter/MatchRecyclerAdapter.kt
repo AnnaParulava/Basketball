@@ -7,23 +7,32 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.basketball.api.ApiFactory.apiService
 import com.example.basketball.databinding.MatchItemBinding
 import com.example.basketball.pojo.Match
+import com.example.basketball.pojo.Team
+import com.example.basketball.viewmodel.MatchViewModel
+import com.example.basketball.viewmodel.SplashViewModel
+import kotlinx.coroutines.Dispatchers
 
 class MatchRecyclerAdapter : ListAdapter<Match, MatchRecyclerAdapter.MatchViewHolder>(
     MatchDiffCallback()
 ) {
 
+
     var matchList: List<Match> = listOf()
-    private fun ImageView.loadUrl(url: String) {
+
+    private fun ImageView.loadUrl(url: String?) {
         Glide
             .with(context.applicationContext)
             .load(url)
             .placeholder(com.google.android.material.R.drawable.mtrl_ic_error)
+            .error(com.google.android.material.R.drawable.mtrl_ic_error)
             .into(this)
     }
 
@@ -56,8 +65,10 @@ class MatchRecyclerAdapter : ListAdapter<Match, MatchRecyclerAdapter.MatchViewHo
             homeTeamNameTextView.text = matchItem.event_home_team
             awayTeamNameTextView.text = matchItem.event_away_team
             finalResultTextView.text = matchItem.event_final_result
-            homeTeamLogoImageView.loadUrl("https://allsportsapi.com/logo-basketball/1458_wellington-saints.png")
-            awayTeamLogoImageView.loadUrl("https://allsportsapi.com/logo-basketball/1458_wellington-saints.png")
+
+
+            homeTeamLogoImageView.loadUrl(matchItem.event_home_team_logo)
+            awayTeamLogoImageView.loadUrl(matchItem.event_away_team_logo)
         }
     }
 

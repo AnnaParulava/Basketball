@@ -1,5 +1,6 @@
 package com.example.basketball.pojo
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -19,9 +20,9 @@ data class Match(
     val country_name: String,
     val league_name: String,
     val league_key: String,
-    val league_round: String,
+    val league_round: String?,
     val league_season: String,
     val event_live: String,
-   // val scores: Scores,
-   // val statistics: Statistics
+    val event_home_team_logo: String?,
+    val event_away_team_logo: String?
 )
