@@ -9,7 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.basketball.R
 import com.example.basketball.api.ApiFactory.apiService
 import com.example.basketball.databinding.FragmentHomeBinding
 import com.example.basketball.ui.adapter.MatchRecyclerAdapter
@@ -44,6 +47,13 @@ class HomeFragment : Fragment() {
         binding.matchesRecyclerView.apply {
             adapter = matchAdapter
             layoutManager = LinearLayoutManager(requireContext())
+
+            matchAdapter.onCoinClickListener = object : MatchRecyclerAdapter.OnCoinClickListener {
+                override fun onCoinClick() {
+
+                    findNavController().navigate(R.id.webViewFragment)
+                }
+            }
         }
     }
 

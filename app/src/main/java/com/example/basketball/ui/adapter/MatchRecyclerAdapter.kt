@@ -24,6 +24,7 @@ class MatchRecyclerAdapter : ListAdapter<Match, MatchRecyclerAdapter.MatchViewHo
     MatchDiffCallback()
 ) {
 
+    var onCoinClickListener: OnCoinClickListener? = null
 
     var matchList: List<Match> = listOf()
 
@@ -66,9 +67,12 @@ class MatchRecyclerAdapter : ListAdapter<Match, MatchRecyclerAdapter.MatchViewHo
             awayTeamNameTextView.text = matchItem.event_away_team
             finalResultTextView.text = matchItem.event_final_result
 
-
             homeTeamLogoImageView.loadUrl(matchItem.event_home_team_logo)
             awayTeamLogoImageView.loadUrl(matchItem.event_away_team_logo)
+
+            itemView.setOnClickListener{
+            onCoinClickListener?.onCoinClick()
+        }
         }
     }
 
@@ -80,6 +84,9 @@ class MatchRecyclerAdapter : ListAdapter<Match, MatchRecyclerAdapter.MatchViewHo
         override fun areContentsTheSame(oldItem: Match, newItem: Match): Boolean {
             return oldItem == newItem
         }
+    }
+    interface  OnCoinClickListener{
+        fun onCoinClick()
     }
 
 }
