@@ -20,9 +20,7 @@ class MatchViewModel (application: Application) : AndroidViewModel(application) 
     private val db = AppDatabase.getInstance(application)
 
     private val _matches = MutableLiveData<List<Match>>()
-    private val _team = MutableLiveData<List<Team>>()
     val matches: LiveData<List<Match>> = _matches
-    val team: LiveData<List<Team>> = _team
 
     init {
         loadMatches()
@@ -33,12 +31,8 @@ class MatchViewModel (application: Application) : AndroidViewModel(application) 
             val matchDao = db.matchesDao()
             val savedMatches = matchDao.getMatchList()
 
-            val teamDao = db.teamDao()
-            val savedTeam = teamDao.getTeam()
-
             withContext(Dispatchers.Main) {
                 _matches.value = savedMatches
-                _team.value = savedTeam
             }
         }
     }

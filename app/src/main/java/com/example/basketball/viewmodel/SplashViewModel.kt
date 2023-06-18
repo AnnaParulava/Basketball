@@ -18,15 +18,10 @@ class SplashViewModel(application: Application) : AndroidViewModel(application) 
         viewModelScope.launch(Dispatchers.IO) {
 
             val apiService = ApiFactory.apiService
-
             val matches = apiService.getMatches().result
-            val team = apiService.getTeam().result
-
             val matchDao = db.matchesDao()
-            val teamDao = db.teamDao()
 
             matchDao.insertMatches(matches)
-            teamDao.insertTeam(team)
         }
     }
 }
