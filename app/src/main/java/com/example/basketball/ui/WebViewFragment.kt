@@ -10,6 +10,7 @@ import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
 import com.example.basketball.R
 import com.example.basketball.databinding.FragmentWebViewBinding
+import com.onesignal.OneSignal
 
 class WebViewFragment : Fragment() {
 
@@ -28,10 +29,25 @@ class WebViewFragment : Fragment() {
         }
         binding.webView.loadUrl("https://dashboard.onesignal.com/apps/23d5e553-659d-45da-a3d5-d4130125639a")
     }
+
+    private fun initSignal(){
+        // Logging set to help debug issues, remove before releasing your app.
+        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE)
+
+        // OneSignal Initialization
+        context?.let { OneSignal.initWithContext(it) }
+        OneSignal.setAppId(ONESIGNAL_APP_ID)
+
+        // promptForPushNotifications will show the native Android notification permission prompt.
+        // We recommend removing the following code and instead using an In-App Message to prompt for notification permission (See step 7)
+        OneSignal.promptForPushNotifications();
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setupWebView()
+        initSignal()
     }
 
     override fun onCreateView(
@@ -46,6 +62,10 @@ class WebViewFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        const val ONESIGNAL_APP_ID = "794509dc-03c9-4c1b-bc97-8d7982592e76"
     }
 
 
