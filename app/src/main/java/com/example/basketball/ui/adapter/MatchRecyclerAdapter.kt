@@ -1,24 +1,16 @@
 package com.example.basketball.ui.adapter
 
-import android.os.Parcel
-import android.os.Parcelable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.basketball.api.ApiFactory.apiService
 import com.example.basketball.databinding.MatchItemBinding
 import com.example.basketball.pojo.Match
-import com.example.basketball.pojo.Team
-import com.example.basketball.viewmodel.MatchViewModel
-import com.example.basketball.viewmodel.SplashViewModel
-import kotlinx.coroutines.Dispatchers
+import com.example.basketball.ui.Util.MatchDiffCallback
 
 class MatchRecyclerAdapter : ListAdapter<Match, MatchRecyclerAdapter.MatchViewHolder>(
     MatchDiffCallback()
@@ -70,22 +62,14 @@ class MatchRecyclerAdapter : ListAdapter<Match, MatchRecyclerAdapter.MatchViewHo
             homeTeamLogoImageView.loadUrl(matchItem.event_home_team_logo)
             awayTeamLogoImageView.loadUrl(matchItem.event_away_team_logo)
 
-            itemView.setOnClickListener{
-            onCoinClickListener?.onCoinClick()
-        }
+            itemView.setOnClickListener {
+                onCoinClickListener?.onCoinClick()
+            }
         }
     }
 
-    class MatchDiffCallback : DiffUtil.ItemCallback<Match>() {
-        override fun areItemsTheSame(oldItem: Match, newItem: Match): Boolean {
-            return oldItem.event_key == newItem.event_key
-        }
 
-        override fun areContentsTheSame(oldItem: Match, newItem: Match): Boolean {
-            return oldItem == newItem
-        }
-    }
-    interface  OnCoinClickListener{
+    interface OnCoinClickListener {
         fun onCoinClick()
     }
 

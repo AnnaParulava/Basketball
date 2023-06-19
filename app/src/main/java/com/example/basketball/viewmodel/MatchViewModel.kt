@@ -1,21 +1,17 @@
 package com.example.basketball.viewmodel
 
 import android.app.Application
-import android.os.Parcel
-import android.os.Parcelable
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.basketball.api.ApiFactory.apiService
 import com.example.basketball.database.AppDatabase
 import com.example.basketball.pojo.Match
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import androidx.lifecycle.viewModelScope
-import com.example.basketball.api.ApiFactory.apiService
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MatchViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -35,7 +31,7 @@ class MatchViewModel(application: Application) : AndroidViewModel(application) {
             while (true) {
                 val matches = apiService.getMatches().result
                 matchDao.insertMatches(matches)
-                delay(20000) // Задержка в 20 секунд перед следующим обновлением
+                delay(20000)
             }
         }
     }
@@ -52,7 +48,7 @@ class MatchViewModel(application: Application) : AndroidViewModel(application) {
                 _matches.value = savedMatches
                 while (true) {
                     _matches.value = matchDao.getMatchList()
-                    delay(20000) // Задержка в 20 секунд перед следующим обновлением
+                    delay(20000)
                 }
             }
         }

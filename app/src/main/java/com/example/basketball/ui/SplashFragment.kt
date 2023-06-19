@@ -1,7 +1,6 @@
 package com.example.basketball.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,37 +19,14 @@ import kotlinx.coroutines.withContext
 
 class SplashFragment : Fragment() {
 
-
     private val viewModel by lazy {
         ViewModelProvider(this)[SplashViewModel::class.java]
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        CoroutineScope(Dispatchers.IO).launch {
-            loadData()
-        }
     }
 
     private var _binding: FragmentSplashBinding? = null
     private val binding
         get() = _binding
             ?: throw RuntimeException("Should only use binding after onCreateView and before onDestroyView")
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentSplashBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 
     private suspend fun loadData() {
         viewModel.loadData()
@@ -61,4 +37,25 @@ class SplashFragment : Fragment() {
         }
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentSplashBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            loadData()
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
